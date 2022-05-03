@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="gchc.salary.insurance.repository.SalesCompanyRepository">
+	<select id="getList" parameterType="gchc.salary.insurance.domain.SalesCompany" resultType="gchc.salary.insurance.domain.SalesCompany">
+		SELECT 
+			SalesCompanyID
+			,SalesCompanyName
+			,ProposalTarget
+			,FirstRegDate
+			,ExpectedSales
+			,SalesGrade
+			,SalesCompanyType
+			,MemberCount
+			,IndustryGroup
+			,ZipCode
+			,Address1
+			,Address2
+			,SalesType1
+			,SalesType2
+			,SalesLevel
+			,SalesMemo
+			,IsOffer
+			,SalesResult
+			,SalesResultMemo
+			,IsProposal
+			,ContactDate
+			,IsCompanyIntro
+			,OpenDate
+			,Memo
+			,FilePath
+			,IsDelete
+			,LastUpdateDateTime
+			,CreateDateTime
+		FROM Insurance_SalesCompany 
+		ORDER BY SalesCompanyID DESC
+	</select>
+	
+</mapper>

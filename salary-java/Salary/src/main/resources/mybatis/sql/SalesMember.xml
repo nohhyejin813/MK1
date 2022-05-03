@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="gchc.salary.insurance.repository.SalesMemberRepository">
+	<select id="getList" parameterType="gchc.salary.insurance.domain.SalesMember" resultType="gchc.salary.insurance.domain.SalesMember">
+		SELECT 
+			IH.SalesHistoryID
+			,IH.SalesCompanyID
+			,IH.MemberID
+			,IH.SalesDate
+			,IH.SalesType
+			,IH.ProposalTarget
+			,IH.SalesMemo
+			,IH.SalesMemoDetail
+			,IH.IsDelete
+			,IH.LastUpdateDateTime
+			,IH.CreateDateTime
+			, IM.Name
+		FROM Insurance_SalesHistory AS IH
+			INNER JOIN Insurance_SalesMember IM  ON IH.MemberID = IM.MemberID
+		ORDER BY SalesHistoryID DESC
+	</select>
+	<select id="get" parameterType="int" resultType="gchc.salary.insurance.domain.SalesMember">
+		SELECT 
+			IM.MemberID,
+			IM.ID,
+			IM.Password,
+			IM.Name,
+			IM.Email,
+			IM.Grade,
+			IM.IsDelete,
+			IM.CreateDateTime
+		FROM Insurance_SalesMember IM
+		WHERE IM.MemberID = #{memberId}
+	</select>
+	
+	
+	<select id="detail" parameterType="String" resultType="gchc.salary.insurance.domain.SalesMember">
+		SELECT 
+			IM.MemberID,
+			IM.ID,
+			IM.Password,
+			IM.Name,
+			IM.Email,
+			IM.Grade,
+			IM.IsDelete,
+			IM.CreateDateTime
+		FROM Insurance_SalesMember IM
+		WHERE IM.ID = #{id}
+	</select>
+	
+<!-- 	<select id="signin" parameterType="String" resultType="gchc.salary.insurance.domain.SalesMember">
+		SELECT 
+			IM.MemberID,
+			IM.ID,
+			IM.Password,
+			IM.Name,
+			IM.Email,
+			IM.Grade,
+			IM.IsDelete,
+			IM.CreateDateTime
+		FROM Insurance_SalesMember IM
+		WHERE IM.ID = 'test12' 
+	</select>	 -->
+		
+	<insert id="join" parameterType="gchc.salary.insurance.parameter.SalesMemberParameter" useGeneratedKeys="true" keyProperty="memberId">
+		INSERT INTO  Insurance_SalesMember
+		(
+			ID,
+			Password,
+			Name,
+			Email,
+			Grade,
+			IsDelete,
+			CreateDateTime
+		)
+		VALUES
+		(
+			#{id},
+			#{password},
+			#{name},
+			#{email},
+			#{grade},
+			#{isDelete},						
+			getdate()
+		)
+	</insert>
+	
+	<update id="update" parameterType="gchc.salary.insurance.domain.SalesMember">
+		UPDATE Insurance_SalesMember
+		SET 
+			Password = #{password},
+			Name = #{name},
+			Email = #{email},
+			Grade = #{grade},
+			IsDelete = #{isDelete}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM Insurance_SalesMember
+		WHERE ID = #{id}
+	</delete>
+</mapper>

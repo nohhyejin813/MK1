@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="gchc.salary.insurance.repository.SalesUserRepository">
+	<select id="login" parameterType="String" resultType="gchc.salary.insurance.domain.SalesUser">
+		SELECT 
+			MEMBERID,
+			ID,
+			Password,
+			Name,
+			Email,
+			Grade,
+			IsDelete,
+			CreateDateTime
+		FROM Insurance_SalesMember
+		WHERE ID=#{id}
+		 
+	</select>	
+	
+	<insert id="insertUser" parameterType="gchc.salary.insurance.parameter.SalesUserParameter" useGeneratedKeys="false" >
+		INSERT INTO  Insurance_SalesMember
+		(
+			ID,
+			Password,
+			Name,
+			Email,
+			Grade,
+			IsDelete,
+			CreateDateTime
+		)
+		VALUES
+		(
+			#{ID},
+			#{Password},
+			#{Name},
+			#{Email},
+			#{Grade},
+			#{IsDelete},						
+			getdate()
+		)
+	</insert>	
+</mapper>
