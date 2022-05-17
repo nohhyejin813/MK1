@@ -1,6 +1,6 @@
 # Spring Boot + Vue.js (JWT+게시판)
 
-## rest api , spring security jwt , vue.js , vuex 위주로 작성 
+## rest api , spring security jwt , vue.js 위주로 작성 
 <hr/>
 
 ### :question: 왜 토큰 기반인가?
